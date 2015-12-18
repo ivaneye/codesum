@@ -7,6 +7,7 @@ import (
 
 	"github.com/ivaneye/codesum/conf"
 	"github.com/ivaneye/codesum/monitor"
+	"fmt"
 )
 
 // Caculate 为统计接口，负责实际的统计工作
@@ -27,7 +28,9 @@ func (caculator *Caculator) Caculate(fileInfo os.FileInfo, cont []byte) int {
 	regstr := caculator.SingleLineComment + `.*`
 	cont = trim(regstr, cont, "")
 	regstr = caculator.MultiLineCommentStart + `[^` + caculator.MultiLineCommentEnd + `]*` + caculator.MultiLineCommentEnd
+	regstr = `(?<!:)\/\/.*|\/\*(\s|.)*?\*\/`
 	cont = trim(regstr, cont, "")
+	fmt.Println(regstr,"|||||||",string(cont))
 	regstr = `[^\r\n]*[\r\n]+`
 	cont = trim(regstr, cont, "/")
 	regstr = `/`
