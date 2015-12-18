@@ -28,11 +28,12 @@ func (caculator *Caculator) Caculate(fileInfo os.FileInfo, cont []byte) int {
 	regstr := caculator.SingleLineComment + `.*`
 	cont = trim(regstr, cont, "")
 	regstr = caculator.MultiLineCommentStart + `[^` + caculator.MultiLineCommentEnd + `]*` + caculator.MultiLineCommentEnd
-	regstr = `(?<!:)\/\/.*|\/\*(\s|.)*?\*\/`
+	regstr = `/\*{1,2}[\s\S]*?\*/`
 	cont = trim(regstr, cont, "")
-	fmt.Println(regstr,"|||||||",string(cont))
-	regstr = `[^\r\n]*[\r\n]+`
+//	regstr = `[^\r\n]*[\r\n]+`
+	regstr = `^[\s]*\n`
 	cont = trim(regstr, cont, "/")
+	fmt.Println(regstr,"|||||||",string(cont))
 	regstr = `/`
 	r := regexp.MustCompile(regstr)
 	lines := len(r.FindAll(cont, -1))
