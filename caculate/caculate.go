@@ -25,8 +25,9 @@ type Caculator struct {
 func (caculator *Caculator) Caculate(fileInfo os.FileInfo, cont []byte) int {
 	//过滤掉所有空行，注释。统计换行符
 	//考虑重构
-	regstr := caculator.SingleLineComment + `[.\s\r\n]*`
+	regstr := caculator.SingleLineComment + `.*[\r\n]*`
 	cont = trim(regstr, cont, "")
+//	fmt.Println(string(cont))
 	regstr = caculator.MultiLineCommentStart + `[^` + caculator.MultiLineCommentEnd + `]*` + caculator.MultiLineCommentEnd
 	regstr = `/\*{1,2}[\s\S]*?\*/[\s\r\n]*`
 	cont = trim(regstr, cont, "")
