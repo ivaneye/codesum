@@ -36,7 +36,7 @@ func initConf(args []string) *conf.Manager {
 	fmt.Println(path)
 	if len(args) == 2 {
 		//只有目录路径，使用默认配置
-		return &conf.Manager{"//", "/\\*", "\\*/", "Action.java", false}
+		return &conf.Manager{"//", "/\\*", "\\*/", "java", false}
 	}else {
 		b, _ := strconv.ParseBool(args[6])
 		return &conf.Manager{args[2], args[3], args[4], args[5], b}

@@ -7,7 +7,6 @@ import (
 
 	"github.com/ivaneye/codesum/conf"
 	"github.com/ivaneye/codesum/monitor"
-	"fmt"
 )
 
 // Caculate 为统计接口，负责实际的统计工作
